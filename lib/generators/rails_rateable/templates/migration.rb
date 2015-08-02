@@ -1,4 +1,4 @@
-class RateableMigration < ActiveRecord::Migration
+class RailsRateableMigration < ActiveRecord::Migration
   def self.up
     create_table "ratings" do |t|
       t.references "rateable",       :polymorphic => true, :nil => false
