@@ -1,6 +1,6 @@
 require 'rails/generators/migration'
 
-class RailsRateableMigrationGenerator < Rails::Generator::Base
+class RailsRateableMigrationGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   def self.source_root
     @_rails_rateable_source_root ||= File.expand_path("../templates", __FILE__)
