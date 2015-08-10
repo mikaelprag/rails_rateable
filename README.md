@@ -1,6 +1,6 @@
 = Rateble
 
-rateable is a rails gem providing a rating interface for ActiveRecord models.
+rails_rateable is a rails gem providing a rating interface for ActiveRecord models.
 It is compitable only with Rails 3 and above. It is released under the MIT license. 
 
 
@@ -40,7 +40,19 @@ Add 'include RailsRateable' to the modal you want to make rateable, then restart
       include RailsRateable
     end
 
-Now your model is extended by the plugin, you can rate it (1-#) or calculate the average rating.
+Now your model is extended by the Gem, you can rate it (1-#) or calculate the average rating. 
+
+
+By default max_rating is 5 i,e user can give rating from 1 to 5 . You can override it by passing max_rating parameter
+to rails_rateable
+
+In Below example, Comment model is made rateable and max_rating set to 10, so for comment user can provide rating between 1 to 10
+
+    class Comment < ActiveRecord::Base
+	  include RailsRateable
+      rails_rateable :max_rating => 10
+    end
+
 
     @movie.rate_it(4, current_user)
 
@@ -53,11 +65,11 @@ Now your model is extended by the plugin, you can rate it (1-#) or calculate the
 
     Movie.find_top_rated           #=> top rated records
 
-Optional you can specify the highest score using the :max_rating paramter as follows. The default for :max_rating is 5.
+    By default 20 top rated result will be returned. Youu can override it by passing numer of record you want.
 
-    class Comment < ActiveRecord::Base
-      acts_as_rateable :max_rating => 10
-    end
+	Movie.find_top_rated(40) # will return 40 records
+
+
 
 
 CREDIT:

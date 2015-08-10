@@ -7,18 +7,16 @@ module RailsRateable
 
   module ClassMethods
     #put class method here to be trigger as say User.method_name
-    def acts_as_rateable(options = {})
+    def rails_rateable(options = {})
       unless respond_to?(:max_rating)
         class_attribute :max_rating
         self.max_rating = options[:max_rating] || 5
       end
     end
     
-    def find_top_rated(params = {})
-      find_params = params.merge(:include => :rating)
-      find_params[:order] = ['ratings.average_rating DESC', find_params.delete(:order)].compact.join(", ")
-      find_params[:limit] = 20 unless find_params.key?(:limit)
-      find(:all, find_params)
+    def find_top_rated(limit = nil)
+      limit = 20 unless limit
+      includes(:rating).order('ratings.average_rating DESC').limit(limit)
     end
     
   end
