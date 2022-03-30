@@ -5,7 +5,7 @@ class Rating < ActiveRecord::Base
   delegate :max_rating, :to => :rateable
 
   def rate(score, user)
-    user_ratings.find_or_initialize_by(user_id: user.id).update_attributes!(:score => score)
+    user_ratings.find_or_initialize_by(user_id: user.id).update!(:score => score)
     reload
   end
 
